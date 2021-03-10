@@ -33,4 +33,4 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: pytest
-        run: pytest --cov=myproj tests/
+        run: python -m pytest --cov=kichtai tests/
