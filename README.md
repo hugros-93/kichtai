@@ -1,7 +1,5 @@
 # __kichtAI__
 
-[![codecov](https://codecov.io/gh/hugros-93/kichtai/branch/main/graph/badge.svg?token=IV2E32ZL2E)](https://codecov.io/gh/hugros-93/kichtai)
-
 ## *''Té-ma la kichtAI, té-ma la taille d'la kichtAI''*
 
 - Scrap lyrics from __Genius API__ and create a clean text corpus
