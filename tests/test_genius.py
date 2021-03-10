@@ -1,5 +1,4 @@
 import pytest
-
 from kichtai.genius import GeniusParser
 
 def test_token():
