@@ -39,7 +39,7 @@ from kichtai.corpus import RapCorpus
 corpus = RapCorpus(rap_parser.dict_artists)
 corpus.create_corpus()
 corpus.clean_text()
-corpus.print_text(limit=500, random_select=True)
+corpus.print_text(limit=500)
 ```
 
 `output:`
@@ -59,10 +59,10 @@ les bonbonnes sont remplies de cocaine baw flexin
 A toy example (corpus creation, model training and text generation) is available in `example.py`. To reach acceptable performances, generate a huge corpus with many artists and many songs.
 - Add your favorite artitsts in `list_artists`
 - Increase the number of pages `nb_page` and number of results per page `per_page` in order to get the lyrics of multiple songs
-- Increase the dimensions of the deep learning architecture (`len_seq`, `embedding_dim`, `rnn_units`)
+- Increase the dimensions of the deep learning architecture `embedding_dim` and `rnn_units`
 - Use your own model ! ;)
 
 _References:_
-- _https://docs.genius.com/_
-- _https://dev.to/willamesoares/how-to-integrate-spotify-and-genius-api-to-easily-crawl-song-lyrics-with-python-4o62_
-- https://www.tensorflow.org/tutorials/text/text_generation
+- *https://docs.genius.com/*
+- *https://dev.to/willamesoares/how-to-integrate-spotify-and-genius-api-to-easily-crawl-song-lyrics-with-python-4o62*
+- *https://www.tensorflow.org/tutorials/text/text_generation*
