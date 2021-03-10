@@ -19,6 +19,14 @@ class GeniusParser():
         self.search_url = self.base_url + '/search'
         self.headers = {'Authorization': 'Bearer ' + self.token}
 
+    def test_token(self):
+        data = {'q': f'"Kaaris"'}
+        test = requests.get(self.search_url, data=data,headers=self.headers).json()
+        if 'error_description' in test:
+            raise Exception(test['error_description'])
+        else:
+            print("Valid access token provided !")
+
     def get_artist_id(self, artist):
         data = {'q': f'"{artist}"'}
         find_id = requests.get(self.search_url, data=data,
