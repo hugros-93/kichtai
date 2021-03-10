@@ -30,4 +30,7 @@ jobs:
         # You may pin to the exact commit or the version.
         # uses: codecov/codecov-action@1f8f3abcccf7960749744fd13547965f0e7d1bdd
         uses: codecov/codecov-action@v1.2.2
+        with:
+          token: 6be18ea9-c5d1-4bae-8320-55a7acc13e4d
+        
         token: 6be18ea9-c5d1-4bae-8320-55a7acc13e4d
