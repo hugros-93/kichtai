@@ -20,6 +20,7 @@ rap_parser.search_for_songs(nb_page=1, per_page=1)
 
 # Search for raw lyrics
 rap_parser.search_for_lyrics()
+rap_parser.dict_artists
 
 ```
 `output:`
