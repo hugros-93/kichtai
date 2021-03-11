@@ -1,5 +1,7 @@
 # __kichtAI__
 
+[![CI](https://github.com/hugros-93/kichtai/actions/workflows/main.yml/badge.svg)](https://github.com/hugros-93/kichtai/actions/workflows/main.yml)
+
 ## *''Té-ma la kichtAI, té-ma la taille d'la kichtAI''*
 
 - Scrap lyrics from __Genius API__ and create a clean text corpus
