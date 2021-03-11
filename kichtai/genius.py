@@ -13,6 +13,11 @@ https://dev.to/willamesoares/how-to-integrate-spotify-and-genius-api-to-easily-c
 
 
 class GeniusParser():
+    '''
+    Class object for parsing lyrics from the Genius API
+
+    token: your Genius token
+    '''
     def __init__(self, token):
         self.token = token
         self.base_url = 'https://api.genius.com'
@@ -20,6 +25,7 @@ class GeniusParser():
         self.headers = {'Authorization': 'Bearer ' + self.token}
 
     def test_token(self):
+        '''Test if your token is valid'''
         data = {'q': f'"Kaaris"'}
         test = requests.get(self.search_url, data=data,headers=self.headers).json()
         if 'error_description' in test:
@@ -28,6 +34,7 @@ class GeniusParser():
             print("Valid access token provided !")
 
     def get_artist_id(self, artist):
+        '''Search for the Genius `id` of artists from their name'''
         data = {'q': f'"{artist}"'}
         find_id = requests.get(self.search_url, data=data,
                                headers=self.headers).json()
@@ -41,12 +48,14 @@ class GeniusParser():
             raise Exception(f"Error 'id not found': {artist} !")
 
     def get_song_info(self, artist_name, song_title):
+        '''Get Genius API songs informations from artist name and song title'''
         data = {'q': song_title + ' ' + artist_name}
         response = requests.get(
             self.search_url, data=data, headers=self.headers)
         return response
 
     def scrap_song_url(self, url):
+        '''Scrap url'''
         page = requests.get(url)
         html = BeautifulSoup(page.text, 'html.parser')
         classes = [value for element in html.find_all(
@@ -59,6 +68,7 @@ class GeniusParser():
             return lyrics
 
     def get_lyrics(self, artist_name, song_title):
+        '''Get lyrics from artist name and song title'''
         response = self.get_song_info(artist_name, song_title)
         remote_song_info = response.json()['response']['hits']
         song_url = remote_song_info[0]['result']['url']
@@ -69,6 +79,7 @@ class GeniusParser():
         raise Warning(f"Error 'scrap_song_url': {song_url} !!")
 
     def get_artist_songs(self, id, params):
+        ''''Get list of artist's songs'''
         search = self.base_url + f'/artists/{id}/songs'
         response = requests.get(
             search, params=params, headers=self.headers)
@@ -77,7 +88,12 @@ class GeniusParser():
                         if song['primary_artist']['id'] == id]
         return artist_songs
 
-    def create_dict_artists(self, list_artists=['Booba']):
+    def create_dict_artists(self, list_artists):
+        '''
+        Create dict. of artists, adapted for lyrics search and creation of corpus
+        
+        list_artists: list of artists names
+        '''
         self.list_artists = list_artists
         self.dict_artists = {
             artist: {
@@ -92,6 +108,12 @@ class GeniusParser():
                 self.dict_artists.pop(artist)
 
     def search_for_songs(self, nb_page=10, per_page=1):
+        '''
+        Search for songs in `dict_artists`
+        
+        nb_page: number of pages to check during the search in the website
+        per_page: maximum number of results per page (max of 50)
+        '''
         for artist_name in tqdm.tqdm(self.dict_artists):
             list_songs = []
             for i in range(nb_page):
@@ -105,11 +127,15 @@ class GeniusParser():
             self.dict_artists[artist_name]['list_songs'] = list(
                 pd.unique(list_songs))
 
-    def search_for_lyrics(self, ):
+    def search_for_lyrics(self):
+        '''
+        Search for lyrics in `dict_artists`
+        '''
         for artist_name in self.dict_artists:
             for song_title in tqdm.tqdm(self.dict_artists[artist_name]['list_songs']):
                 self.dict_artists[artist_name]['lyrics'][song_title] = self.get_lyrics(artist_name, song_title)
 
     def export(self, filename):
+        '''Export `dict_artists`'''
         with open(filename, 'w', encoding='utf-8') as f:
             json.dump(self.dict_artists, f)
