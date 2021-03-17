@@ -1,9 +1,9 @@
-# __kichtAI__
+# __kicht'ai__
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![CI](https://github.com/hugros-93/kichtai/actions/workflows/main.yml/badge.svg)](https://github.com/hugros-93/kichtai/actions/workflows/main.yml)
 
-## *''Té-ma la kichtAI, té-ma la taille d'la kichtAI''*
+## *''Té-ma la kicht'ai, té-ma la taille d'la kicht'ai''*
 
 - Scrap lyrics from __Genius API__ and create a clean text corpus
 - Train from scratch a sequence model for text generation using __tensorflow__
